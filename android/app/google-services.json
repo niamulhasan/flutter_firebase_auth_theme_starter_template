@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "170320625412",
+    "project_id": "sutarhut-express",
+    "storage_bucket": "sutarhut-express.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:170320625412:android:af3a58961a5ebc48be5a51",
+        "android_client_info": {
+          "package_name": "com.sutarhut.express"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "170320625412-0q0l3l0bnin3ntbv1ceuk9bo4tabqt0i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sutarhut.express",
+            "certificate_hash": "1b2939e01e64b2478dcb517e9716c4c92a8ed680"
+          }
+        },
+        {
+          "client_id": "170320625412-hmt0p4sfk165e3699t7up60ndi1ecvge.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYxffU8aaknMfgSL4DbleR3qLy5GG2vJE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "170320625412-hmt0p4sfk165e3699t7up60ndi1ecvge.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,28 @@
+[
+    {
+        "key": "settings",
+        "en": "Settins",
+        "bn": "সেটিংস"
+    },
+    {
+        "key": "theme",
+        "en": "Theme",
+        "bn": "থিম"
+    },
+    {
+        "key": "light",
+        "en": "Light",
+        "bn": "লাইট"
+    },
+    {
+        "key": "dark",
+        "en": "Dark",
+        "bn": "ডার্ক"
+    },
+    {
+        "key": "change",
+        "en": "Change",
+        "bn": "পরিবর্তন"
+    }
+
+]
