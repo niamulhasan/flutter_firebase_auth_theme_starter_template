@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../auth_gurd.dart';
-import '../providers/theme_provider.dart';
+import '../../routes/route_generator.dart';
+import '../../providers/theme_provider.dart';
 
 class MaterialAppScreen extends StatelessWidget {
   const MaterialAppScreen({Key? key}) : super(key: key);
@@ -13,9 +13,8 @@ class MaterialAppScreen extends StatelessWidget {
       builder: (context, theme, child) => MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: theme.getTheme(),
-        // home: HomeScreen(),
-        // home: LoginScreen(),
-        home: AuthGurd(),
+        onGenerateRoute: RouteGenerator.generate,
+        initialRoute: '/',
       ),
     );
   }

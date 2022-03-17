@@ -1,7 +1,9 @@
-import 'package:express/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ternav_icons/ternav_icons.dart';
+
+import '../../config/colors_themes.dart';
+import '../../providers/theme_provider.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({Key? key}) : super(key: key);
@@ -32,15 +34,14 @@ class ThemeToggleTile extends StatelessWidget {
       return ListTile(
         leading: Icon(TernavIcons.bold.sun),
         title: Text("Theme"),
-        subtitle: theme.getThemeName() == AppTheme.lightYellow
-            ? Text("Light")
-            : Text("Dark"),
+        subtitle:
+            theme.getThemeName() == "Light" ? Text("Light") : Text("Dark"),
         trailing: ElevatedButton(
           onPressed: () {
-            if (theme.getThemeName() == AppTheme.lightYellow) {
-              theme.setTheme(AppTheme.darkYellow);
+            if (theme.getThemeName() == "Light") {
+              theme.setTheme("Dark");
             } else {
-              theme.setTheme(AppTheme.lightYellow);
+              theme.setTheme("Light");
             }
           },
           child: Text(

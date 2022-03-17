@@ -4,11 +4,13 @@ class AuthService {
   final FirebaseAuth _auth;
   late String _verificationID;
   User? _user;
+  String? _errors;
 
   AuthService(this._auth);
 
   User? get getUser => _user;
   User? get getCurrentUser => FirebaseAuth.instance.currentUser;
+  String? get getError => _errors;
 
   void verifyPhoneNumber({required String phoneNumber}) async {
     try {
@@ -21,6 +23,7 @@ class AuthService {
               "Phone Number automatically verified and user loggedin: ${_auth.currentUser!.uid}");
         },
         verificationFailed: (FirebaseAuthException authException) {
+          _errors = "${authException.code}";
           print(
               'Phone number verification failed. Code: ${authException.code}. Message: ${authException.message}');
         },
@@ -34,6 +37,7 @@ class AuthService {
         },
       );
     } catch (e) {
+      _errors = "Express Error: $e";
       print("Failed to Verify Phone Number: $e");
     }
   }
@@ -48,8 +52,26 @@ class AuthService {
 
       print("Successfully signed in UID: ${_user!.uid}");
       return true;
-    } catch (e) {
-      print("Failed to sign in: " + e.toString());
+    } on FirebaseAuthException catch (e) {
+      // _errors = "SutarHut Express:${e.code}";
+      if (e.code == "invalid-verification-code") {
+        _errors = "Wrong Verification Code";
+      } else if (e.code == "account-exists-with-different-credential") {
+        _errors = "Phone number already exists";
+      } else if (e.code == "invalid-credential") {
+        _errors = "Invalid Credential";
+      } else if (e.code == "operation-not-allowed") {
+        _errors = "Permission Denied";
+      } else if (e.code == "user-disabled") {
+        _errors = "Your account has been blocked";
+      } else if (e.code == "user-not-found") {
+        _errors = "No account found";
+      } else if (e.code == "wrong-password") {
+        _errors = "Wrong Password";
+      } else if (e.code == "invalid-verification-id") {
+        _errors = "Verification ID is not valid";
+      }
+      print("Failed to sign in: " + e.code.toString());
       return false;
     }
   }

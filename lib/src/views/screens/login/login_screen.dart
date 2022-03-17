@@ -1,10 +1,13 @@
-import 'package:express/config/colors_themes.dart';
-import 'package:express/providers/auth_provider.dart';
-import 'package:express/views/home/home_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:text_form_field_validator/text_form_field_validator.dart';
+
+import '../../../config/colors_themes.dart';
+import '../../../core/utils/ui/ui_utils.dart';
+import '../../../providers/auth_provider.dart';
+import 'widgets/auth_error.dart';
+import 'widgets/auth_messege.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -39,7 +42,7 @@ class LoginScreen extends StatelessWidget {
             Positioned(
               bottom: 150.0,
               child: SvgPicture.asset(
-                "assets/decoration/logo.svg",
+                UiUtils.themeAsset(context: context, assetLocation: "logo.svg"),
                 width: 180.0,
               ),
             ),
@@ -57,6 +60,8 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                AuthErrorMessege(),
+                AuthMessege(),
                 Column(
                   children: [
                     Form(
@@ -136,10 +141,7 @@ class LoginScreen extends StatelessWidget {
                                 await auth.login(_smsController.text);
                             if (isLoginSucceed) {
                               auth.setIsLoggedIn(true);
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) => HomeScreen()),
-                              );
+                              Navigator.of(context).pushNamed('/');
                             } else {
                               auth.setIsLoggedIn(false);
                             }
