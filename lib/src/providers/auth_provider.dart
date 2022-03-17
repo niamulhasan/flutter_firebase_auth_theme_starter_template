@@ -1,10 +1,13 @@
-import 'package:express/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+
+import '../services/auth_service.dart';
 
 class AuthProvider with ChangeNotifier {
   bool _isLoggedIn = false;
   final AuthService _authService = AuthService(FirebaseAuth.instance);
+  String? _error;
+  String? _messege;
 
   AuthProvider() {
     if (_authService.getCurrentUser != null) {
@@ -21,10 +24,19 @@ class AuthProvider with ChangeNotifier {
 
   void verifyNumber(phoneNumber) {
     _authService.verifyPhoneNumber(phoneNumber: phoneNumber);
+    _messege = "Check your phone for verification code";
+    notifyListeners();
   }
 
   Future<bool> login(smsCode) async {
-    return await _authService.loginWithPhoneNumber(smsCode: smsCode);
+    if (await _authService.loginWithPhoneNumber(smsCode: smsCode)) {
+      _isLoggedIn = true;
+      return true;
+    } else {
+      _error = _authService.getError;
+      notifyListeners();
+    }
+    return false;
   }
 
   logout() async {
@@ -32,4 +44,8 @@ class AuthProvider with ChangeNotifier {
     _isLoggedIn = false;
     notifyListeners();
   }
+
+  String? getError() => "$_error";
+
+  String? getMessege() => "$_messege";
 }

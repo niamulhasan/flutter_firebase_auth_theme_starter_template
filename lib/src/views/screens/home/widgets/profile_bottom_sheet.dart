@@ -1,8 +1,8 @@
-import 'package:express/config/colors_themes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:ternav_icons/ternav_icons.dart';
+
+import '../../../../config/colors_themes.dart';
 
 class ProfileBottomSheet extends StatelessWidget {
   const ProfileBottomSheet({
@@ -32,6 +32,7 @@ class ProfileBottomSheet extends StatelessWidget {
           ElevatedButton(
               onPressed: () {
                 FirebaseAuth.instance.signOut();
+                Navigator.of(context).pushNamed("/login");
               },
               child: Text("Logout")),
           TextButton(

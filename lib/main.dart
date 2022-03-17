@@ -1,12 +1,12 @@
-import 'package:express/config/colors_themes.dart';
-import 'package:express/providers/auth_provider.dart';
-import 'package:express/providers/theme_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-import 'views/material_app_screen.dart';
+import 'src/config/colors_themes.dart';
+import 'src/providers/auth_provider.dart';
+import 'src/providers/theme_provider.dart';
+import 'src/views/layouts/material_app.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,16 +22,16 @@ Future<void> main() async {
       providers: [
         ChangeNotifierProvider(
           create: (context) => ThemeProvider(
-            AppTheme.darkYellow,
+            defaultThemeName: "Light",
             themes: [
-              {AppTheme.darkYellow: MyThemeData.lightYellowTheme()},
-              {AppTheme.lightYellow: MyThemeData.darkYellowTheme()}
+              {"Light": MyThemeData.lightYellowTheme()},
+              {"Dark": MyThemeData.darkYellowTheme()}
             ],
           ),
         ),
         ChangeNotifierProvider(create: (context) => AuthProvider()),
       ],
-      child: MaterialAppScreen(),
+      child: const MaterialAppScreen(),
     ),
   );
 }
